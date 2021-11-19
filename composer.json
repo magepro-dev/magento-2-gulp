@@ -1,12 +1,12 @@
 {
-    "name": "bobmotor/magento-2-gulp",
+    "name": "magepro/magento-2-gulp",
     "type": "magento2-component",
     "description": "Magento 2 gulp configuration",
     "license": "MIT",
-    "homepage": "https://github.com/bobmotor/magento-2-gulp",
+    "homepage": "https://github.com/magepro-dev/magento-2-gulp",
     "authors": [
         {
-            "name": "Volodymyr Lisniak <thebobmotor@gmail.com>"
+            "name": ""
         }
     ],
     "minimum-stability": "dev",
