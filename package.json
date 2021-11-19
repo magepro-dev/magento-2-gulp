@@ -1,12 +1,12 @@
 {
     "name": "magento-2-gulp",
     "version": "1.5.0",
-    "author": "Volodymyr Lisniak <thebobmotor@gmail.com>",
+    "author": "",
     "description": "Magento 2 node modules dependencies",
     "license": "MIT",
     "repository": {
         "type": "git",
-        "url": "git://github.com/bobmotor/magento-2-gulp.git"
+        "url": "git@github.com:magepro-dev/magento-2-gulp.git"
     },
     "devDependencies": {
         "@babel/core": "^7.13.10",
