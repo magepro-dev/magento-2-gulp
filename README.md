@@ -25,7 +25,7 @@ Add repository's path to the `composer.json`
 "repositories": [
     {
         "type": "github",
-        "url": "https://github.com/bobmotor/magento-2-gulp"
+        "url": "https://github.com/magepro-dev/magento-2-gulp"
     }
 ],
 ```
@@ -33,7 +33,7 @@ Add repository's path to the `composer.json`
 Run
 
 ```
-$ composer require --dev bobmotor/magento-2-gulp
+$ composer require --dev magepro-dev/magento-2-gulp
 ```
 
 Rename the following files in your project root directory
