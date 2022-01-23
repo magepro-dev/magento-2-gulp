@@ -1,77 +1,69 @@
 # Getting Started
 
-### Check for Node and NPM
+## Check for Node and NPM
 
-Make sure that you've installed Node and NPM before attempting to install gulp (supports gulp `4.x.x`). For gulp `3.x.x` use [~1.4.0](https://github.com/bobmotor/magento-2-gulp/tree/v1.4.1) version.
+Make sure that you've installed Node and NPM before attempting to install gulp (supports gulp `4.x.x`).<br/>
+For gulp `3.x.x` use [~1.4.0](https://github.com/bobmotor/magento-2-gulp/tree/v1.4.1) version.
+```shell
+node -v
+npm -v
 ```
-$ node -v
-```
-```
-$ npm -v
-```
-### Install Gulp globally
 
-```
-$ npm install gulp -g
+## Install Gulp globally
+
+```shell
+npm i -g gulp
 ```
 
 ## Project integration
 
-- ### Composer
+### Composer
 
-Add repository's path to the `composer.json`
+1. Add the repository's path to the `composer.json`
 
-```
+```json
 "repositories": [
     {
-        "type": "github",
-        "url": "https://github.com/magepro-dev/magento-2-gulp"
+      "type": "github",
+      "url": "https://github.com/magepro-dev/magento-2-gulp"
     }
-],
+]
 ```
 
-Run
+2. Run
 
+```shell
+composer require --dev magepro-dev/magento-2-gulp
 ```
-$ composer require --dev magepro-dev/magento-2-gulp
-```
 
-Rename the following files in your project root directory
+3. Rename the following files in your project root directory:<br/>`package.json.example` to `package.json`
+4. Install modules listed as dependencies in the `package.json`:
 
-* `package.json.example` to `package.json`
-
-Install modules listed as dependencies in `package.json`
-
-```
-$ npm install
+```shell
+npm i
 ```
 or
+```shell
+yarn
 ```
-$ yarn
-```
 
-- ### Manually
+### Manually
 
-Copy source files to your project root directory
+1. Copy source files to your project dir.
+2. Rename the following files in your project dir:<br/>`package.json.example` to `package.json`
+3. Install modules listed as dependencies in the `package.json`:
 
-
-Rename the following files in your project root directory
-
-* `package.json.example` to `package.json`
-
-Install modules listed as dependencies in `package.json`
-
-```
-$ npm install
+```shell
+npm i
 ```
 or
-```
-$ yarn
+```shell
+yarn
 ```
 
 ## Configuration
 
-Copy the contents of `themes.js` into `local-themes.js` and add your theme configuration in the `dev/tools/grunt/configs/` directory.
+Copy the content of `themes.js` into the `local-themes.js` and add your theme configuration in the `dev/tools/grunt/configs/` directory.
 
 ```
 module.exports = {
@@ -109,119 +101,97 @@ module.exports = {
 }
 ```
 
-Open `dev/tools/gulp/configs/local.js` and set your `hostname` to configure `BrowserSync` and `Critical CSS` urls.
+## How to use
 
+In a project root dir run `gulp [command] --[themeName] --[argument]`
+
+Available commands:
+
+<table>
+    <thead>
+        <tr>
+            <td><strong>Command</strong></td>
+            <td><strong>Arguments</strong></td>
+            <td><strong>Description</strong></td>
+        </tr>
+    </thead>
+    <tr>
+        <td>help</td>
+        <td></td>
+        <td>Display this help message</td>
+    </tr>
+    <tr>
+        <td>clean</td>
+        <td><i>--themeName</i></td>
+        <td>Remove cached files (pub/static/**, var/**)</td>
+    </tr>
+    <tr>
+        <td>exec</td>
+        <td><i>--themeName</i></td>
+        <td>Republishes symlinks to the source files</td>
+    </tr>
+    <tr>
+        <td>less</td>
+        <td><i>--themeName</i></td>
+        <td>Compile LESS to CSS</td>
+    </tr>
+    <tr>
+        <td rowspan="2">watch</td>
+        <td><i>--themeName</i></td>
+        <td>Watch for *.less files</td>
+    </tr>
+    <tr>
+        <td><i>--themeName --docker</i></td>
+        <td>Watch for *.less files in a docker container</td>
+    </tr>
+</table>
+
+See commands:
+```shell
+gulp help
 ```
-module.exports = {
-    hostname: 'hostname',
-    generic: 'loc',
-    useHttp2: false
-};
+
+Compile styles:
+```shell
+gulp clean --themeName && gulp exec --themeName && gulp less --themeName
+```
+
+Run watcher:
+```shell
+gulp watch --themeName
+gulp watch --themeName --docker
+```
+
+The argument `--docker` enables the option `usePolling: true` for the gulp watcher. Read more [here](https://gulpjs.com/docs/en/api/watch/). 
+
+### Scripts
+See short scripts in the `package.json.example`.
+
+Example:
+```shell
+"gulp": "gulp clean --themeName && gulp exec --themeName && gulp less --themeName && gulp watch --themeName"
+"gulp:docker": "gulp clean --themeName && gulp exec --themeName && gulp less --themeName && gulp watch --themeName --docker"
+```
+
+Run the script:
+```shell
+npm run [scriptName]
+```
+or
+```shell
+yarn [scriptName]
 ```
 
 Example:
-
-```
-module.exports = {
-    hostname: 'localhost',
-    generic: 'loc',
-    useHttp2: true
-};
+```shell
+npm run gulp
+npm run gulp:docker
 ```
 
-If you need to configure `BrowserSync` use the `dev/tools/gulp/configs/bsConfig.js`
-
-```
-module.exports = {
-    proxy: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    host: `${localConfig.hostname}.${localConfig.generic}`,
-    tunnel: `${localConfig.hostname}`,
-    open: false
-};
+#### Note:
+`themeName` is a key of exported object in the file:
+```shell
+dev/tools/grunt/configs/local-themes.js
 ```
 
-Example:
-
-```
-module.exports = {
-    proxy: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    host: `${localConfig.hostname}.${localConfig.generic}`,
-    tunnel: `${localConfig.hostname}`,
-    open: true
-};
-```
-
-To configure your desired screen size for the critical path use the `dev/tools/gulp/configs/criticalConfig.js`
-
-```
-module.exports = {
-    out: 'critical.css',
-    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    width: 1920,
-    height: 900,
-    forceExclude: [/\[data-role=main-css-loader]/]
-};
-```
-
-Example:
-
-```
-module.exports = {
-    out: 'critical.css',
-    url: `${ptotocol}://${localConfig.hostname}.${localConfig.generic}/`,
-    width: 1920,
-    height: 250,
-    forceExclude: [/\[data-role=main-css-loader]/]
-};
-```
-
-### How to use
-
-In project root dir run `gulp [command] --[theme] --[arguments]`
-
-Avaliable commands:
-
-```
-babel                           Compile ES6+ to ES5
-clean                           Remove cached files (pub/static/*, var/*)
-critical                        Compile critical css
-default, help                   Display this help message
-exec                            Republishes symlinks to the source files
-less                            Compile LESS to CSS
-watch-scripts                   Watch for src/*.js files
-watch-styles                    Watch for *.less files
-```
-
-Options:
-
-```
---[package]                     Package name (optional field). Need to be the first option. Ex.: --blank
---min                           Minify css files
---map                           Add maping to CSS files
---live                          Enable livereload
---bs                            Enable browsersync
-```
-
-Examples:
-
-Removes the theme related static files in the `pub/static` and `var` directories, republishes symlinks to the source files to the `pub/static/frontend/ directory` and compiles CSS files using the symlinks published in the `pub/static/frontend/ directory` with source map and minification.
-```
-gulp clean --luma && gulp exec --luma && gulp less --luma --map --min
-```
-Compiles CSS files using the symlinks published in the `pub/static/frontend/` directory with source map.
-```
-gulp less --luma --map
-```
-Watch styles with `livereload` (`LiveReload` browser extension should be installed)
-```
-gulp watch-styles --luma --live
-```
-Creates `critical.css` from `styles-l.css` and `styles-m.css` and put it to `app/design/frontend/<VandorName>/<ThemeName>/web/css`.
-In `production` mode should be run after `php bin/magento s:s:d` (task uses `pub/static/deployed_version.txt` to create absolute path to the static files)
-```
-gulp critical --luma
-```
-
-Note:
-
-* ES6 files should be placed at `.../web/js/src/*.js`. Compiled files will be in the `.../web/js/*.js`
+Replace it everywhere for npm scripts.

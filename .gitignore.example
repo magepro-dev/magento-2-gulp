@@ -3,4 +3,3 @@
 /dev/tools/grunt/configs/local-themes.js
 /.stylelintrc
 /.eslintrc
-/.babelrc

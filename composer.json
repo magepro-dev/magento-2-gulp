@@ -28,9 +28,6 @@
                 ".eslintrc",
                 ".eslintrc"
             ], [
-                ".babelrc",
-                ".babelrc"
-            ], [
                 ".gitignore.example",
                 ".gitignore.example"
             ]
