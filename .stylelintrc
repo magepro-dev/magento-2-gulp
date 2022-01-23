@@ -3,14 +3,12 @@
         "stylelint-order"
     ],
     "rules": {
-        # stylelint-order plugin
         "order/order": [
             "less-mixins",
             "at-variables",
             "declarations"
         ],
         "order/properties-alphabetical-order": true,
-        # Possible errors
         "color-no-invalid-hex": true,
         "font-family-no-duplicate-names": true,
         "font-family-no-missing-generic-family-keyword": true,
@@ -34,7 +32,6 @@
         "no-empty-source": true,
         "no-extra-semicolons": true,
         "no-invalid-double-slash-comments": true,
-        # Limit language features
         "color-named": "never",
         "function-url-no-scheme-relative": true,
         "shorthand-property-no-redundant-values": true,
@@ -49,7 +46,6 @@
         "declaration-block-single-line-max-declarations": 1,
         "selector-max-empty-lines": 0,
         "no-unknown-animations": true,
-        # Stylistic issues
         "color-hex-case": "lower",
         "color-hex-length": "short",
         "font-family-name-quotes": "always-where-recommended",

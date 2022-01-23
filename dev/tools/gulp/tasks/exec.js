@@ -1,23 +1,18 @@
-const exec = require('exec-queue');
-
-const args = require('../args');
+const gulpExec = require('exec-queue');
 const loggers = require('../loggers');
-const matchTheme = require('../matchTheme');
 const paths = require('../paths');
 
-module.exports = async () => {
-    if (!matchTheme.matchTheme) {
-        loggers.matchTheme(args.themeName, matchTheme.avaliablePackages);
-    } else {
-        let task = 'exec';
+const exec = async () => {
+    loggers.task('exec', paths.execPaths);
 
-        loggers.task(task, paths.execPaths);
-
-        paths.execPaths.forEach(execOptions => {
-            exec(`${execOptions}`, (err, stdout, stderr) => {
-                console.log(stdout);
-                console.log(stderr);
-            });
+    paths.execPaths.map(execOptions => {
+        gulpExec(`${execOptions}`, (err, stdout, stderr) => {
+            // eslint-disable-next-line no-console
+            console.log(stdout);
+            // eslint-disable-next-line no-console
+            console.log(stderr);
         });
-    }
+    });
 };
+
+module.exports = exec;

@@ -1,5 +1,5 @@
 const loggers = require('../loggers');
 
-module.exports = async () => {
-    loggers.help();
-};
+const help = async () => loggers.help();
+
+module.exports = help;
